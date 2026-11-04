@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emaza | Premium Food Exporter – Rice, Cooking Oil, Flour, Sugar & Seafood</title>
+<meta name="description" content="Emaza is a trusted export company supplying premium rice, cooking oil, wheat flour, brown sugar and sardine fish worldwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<script>
+/* Apply saved theme before paint (no flash) */
+(function(){
+  try{
+    var t = localStorage.getItem('emaza-theme');
+    if(!t){ t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; }
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
+<style>
+:root{
+  --bg:#faf8f3; --bg2:#f2eee4; --card:#ffffff; --text:#1c2420; --muted:#5d6a63;
+  --brand:#0f6b4f; --brand2:#16a37a; --accent:#e9a82b; --line:#e3ddcf;
+  --shadow:0 10px 30px rgba(20,40,30,.08); --shadow-lg:0 24px 60px rgba(20,40,30,.16);
+  --hero1:#0f6b4f; --hero2:#0a3d2e; --radius:20px;
+}
+[data-theme="dark"]{
+  --bg:#0c1210; --bg2:#101a16; --card:#14201b; --text:#eef3ef; --muted:#9db0a6;
+  --brand:#2fcf9c; --brand2:#19a37a; --accent:#f2b84a; --line:#223229;
+  --shadow:0 10px 30px rgba(0,0,0,.4); --shadow-lg:0 24px 60px rgba(0,0,0,.55);
+  --hero1:#0d5a43; --hero2:#06150f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background .35s,color .35s;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.container{width:min(1200px,92%);margin-inline:auto}
+section{padding:96px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--brand);margin-bottom:14px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--accent)}
+.sec-title{font-size:clamp(2rem,4vw,3rem);margin-bottom:14px}
+.sec-sub{color:var(--muted);max-width:620px}
+.center{text-align:center}.center .sec-sub{margin-inline:auto}.center .eyebrow{justify-content:center}
+
+/* progress + topbar */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--brand2));z-index:200}
+.topbar{background:var(--hero2);color:#d7efe5;font-size:.82rem;padding:8px 0}
+.topbar .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topbar a:hover{color:var(--accent)}
+
+/* header */
+header.nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+header.nav.scrolled{box-shadow:var(--shadow)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-size:1.2rem;box-shadow:0 6px 16px rgba(15,107,79,.35)}
+.logo small{display:block;font-family:'Plus Jakarta Sans';font-size:.58rem;letter-spacing:.2em;color:var(--muted);font-weight:600;margin-top:-4px}
+.menu{display:flex;gap:6px;align-items:center}
+.menu a{padding:8px 14px;border-radius:999px;font-weight:600;font-size:.92rem;color:var(--muted);transition:.2s}
+.menu a:hover,.menu a.active{color:var(--brand);background:color-mix(in srgb,var(--brand) 10%,transparent)}
+.actions{display:flex;gap:10px;align-items:center}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:1.1rem;position:relative;transition:.25s}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--brand);box-shadow:var(--shadow)}
+.badge{position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;border-radius:99px;background:var(--accent);color:#1b1400;font-size:.68rem;font-weight:800;display:none;place-items:center;padding:0 5px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:700;font-size:.95rem;transition:.25s;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 10px 24px rgba(15,107,79,.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(15,107,79,.4)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.5);color:#fff}
+.btn-ghost:hover{background:#fff;color:var(--hero2)}
+.btn-outline{border:1.5px solid var(--line);background:var(--card)}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand)}
+.hamburger{display:none}
+
+/* hero */
+.hero{position:relative;background:radial-gradient(1200px 600px at 85% -10%,var(--hero1),transparent 60%),linear-gradient(160deg,var(--hero2),#04110c);color:#fff;padding:110px 0 130px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,#000 30%,transparent)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:float 14s ease-in-out infinite}
+.blob.b1{width:380px;height:380px;background:#16a37a;top:-100px;right:8%}
+.blob.b2{width:300px;height:300px;background:#e9a82b;bottom:-120px;left:-60px;animation-delay:-6s;opacity:.22}
+@keyframes float{50%{transform:translate(30px,-30px) scale(1.08)}}
+.hero .container{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 16px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:.82rem;font-weight:600;margin-bottom:22px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(233,168,43,.3);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(233,168,43,0)}}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.4rem);margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{color:#cfe6dc;font-size:1.1rem;max-width:540px;margin-bottom:32px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-card{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);border-radius:28px;padding:26px;box-shadow:var(--shadow-lg)}
+.hero-card h3{font-size:1.2rem;margin-bottom:16px;font-family:'Plus Jakarta Sans';font-weight:700}
+.mini{display:flex;align-items:center;gap:14px;padding:12px;border-radius:14px;background:rgba(255,255,255,.07);margin-bottom:10px;transition:.25s;cursor:pointer}
+.mini:hover{background:rgba(255,255,255,.16);transform:translateX(6px)}
+.mini .em{font-size:1.7rem;width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center}
+.mini b{display:block}.mini span{font-size:.8rem;color:#bcd8cc}
+.mini .go{margin-left:auto;opacity:.7}
+
+/* trust strip */
+.strip{background:var(--bg2);border-block:1px solid var(--line);padding:26px 0;overflow:hidden}
+.marquee{display:flex;gap:56px;width:max-content;animation:scroll 32s linear infinite}
+.strip:hover .marquee{animation-play-state:paused}
+.marquee span{font-weight:700;color:var(--muted);display:flex;gap:10px;align-items:center;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* products */
+.tools{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;margin:38px 0 34px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:9px 18px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:600;font-size:.88rem;transition:.2s}
+.chip:hover{border-color:var(--brand)}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+[data-theme="dark"] .chip.on{color:#05150f}
+.search{position:relative}
+.search input{padding:12px 18px 12px 42px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;width:260px;outline:0;transition:.2s}
+.search input:focus{border-color:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 18%,transparent)}
+.search::before{content:"🔍";position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.35s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.thumb{height:190px;display:grid;place-items:center;font-size:5.2rem;position:relative;overflow:hidden}
+.thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 55%)}
+.thumb span{position:relative;z-index:1;transition:.4s;filter:drop-shadow(0 12px 16px rgba(0,0,0,.25))}
+.card:hover .thumb span{transform:scale(1.18) rotate(-6deg)}
+.tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(0,0,0,.45);color:#fff;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:99px;backdrop-filter:blur(6px)}
+.num{position:absolute;top:10px;right:16px;z-index:2;font-family:'Fraunces';font-size:2rem;color:rgba(255,255,255,.7);font-weight:700}
+.card .body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:1.4rem}
+.card p{color:var(--muted);font-size:.93rem;flex:1}
+.specs{display:flex;gap:8px;flex-wrap:wrap}
+.specs small{background:var(--bg2);border:1px solid var(--line);padding:3px 10px;border-radius:99px;font-size:.72rem;font-weight:600;color:var(--muted)}
+.card .row{display:flex;gap:10px;margin-top:8px}
+.card .row .btn{padding:10px 18px;font-size:.85rem;flex:1;justify-content:center}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px}
+
+/* stats */
+.stats{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;position:relative;overflow:hidden}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat{text-align:center;padding:30px 12px;border-radius:var(--radius);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.stat b{display:block;font-family:'Fraunces';font-size:3rem;color:var(--accent)}
+.stat span{color:#c7e3d7;font-weight:500;font-size:.92rem}
+
+/* features */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.visual{aspect-ratio:1;border-radius:36px;background:linear-gradient(145deg,var(--brand),var(--hero2));display:grid;place-items:center;font-size:9rem;position:relative;box-shadow:var(--shadow-lg);overflow:hidden}
+.visual::before{content:"";position:absolute;width:140%;height:140%;background:conic-gradient(from 0deg,transparent,rgba(233,168,43,.35),transparent 40%);animation:spin 12s linear infinite}
+.visual span{position:relative;animation:bob 4s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes bob{50%{transform:translateY(-14px)}}
+.feat-list{display:grid;gap:16px;margin-top:28px}
+.feat{display:flex;gap:16px;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line);transition:.3s}
+.feat:hover{transform:translateX(8px);border-color:var(--brand)}
+.feat .n{font-family:'Fraunces';color:var(--accent);font-size:1.4rem;font-weight:700}
+.feat b{display:block}.feat p{color:var(--muted);font-size:.9rem}
+
+/* process */
+.alt{background:var(--bg2)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px;position:relative}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 28px;text-align:center;transition:.3s}
+.step:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.step .ic{width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;font-size:2rem;margin:0 auto 18px;box-shadow:0 10px 22px rgba(15,107,79,.3)}
+.step h3{font-size:1.25rem;margin-bottom:8px}.step p{color:var(--muted);font-size:.93rem}
+
+/* markets */
+.markets{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:36px}
+.markets span{padding:12px 22px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-weight:600;transition:.25s}
+.markets span:hover{background:var(--brand);color:#fff;transform:translateY(-3px)}
+[data-theme="dark"] .markets span:hover{color:#05150f}
+
+/* faq */
+.faq{max-width:820px;margin:44px auto 0;display:grid;gap:12px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s}
+.qa.open{border-color:var(--brand);box-shadow:var(--shadow)}
+.qa button{width:100%;text-align:left;padding:20px 24px;font-weight:700;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.qa button i{width:30px;height:30px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-style:normal;transition:.3s;flex:none}
+.qa.open button i{transform:rotate(45deg);background:var(--brand);color:#fff}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.qa .ans p{padding:0 24px 22px;color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;margin-top:48px}
+.info{display:grid;gap:16px;align-content:start}
+.info a,.info div{display:flex;gap:16px;align-items:center;padding:20px;border-radius:18px;background:var(--card);border:1px solid var(--line);transition:.3s}
+.info a:hover{border-color:var(--brand);transform:translateX(6px)}
+.info .ic{width:50px;height:50px;border-radius:14px;background:color-mix(in srgb,var(--brand) 14%,transparent);display:grid;place-items:center;font-size:1.3rem;flex:none}
+.info small{color:var(--muted);display:block}
+form.quote{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form .full{grid-column:1/-1}
+label{font-size:.82rem;font-weight:700;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;outline:0;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 18%,transparent)}
+textarea{min-height:110px;resize:vertical}
+.err{border-color:#e5484d!important}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* footer */
+footer{background:var(--hero2);color:#bcd3c8;padding:70px 0 26px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+footer h4{color:#fff;margin-bottom:16px}
+footer li{list-style:none;margin-bottom:10px}
+footer a:hover{color:var(--accent)}
+footer .logo{color:#fff;margin-bottom:14px}
+.news{display:flex;margin-top:18px;background:rgba(255,255,255,.08);border-radius:99px;padding:5px}
+.news input{background:none;border:0;color:#fff;box-shadow:none!important}
+.news button{background:var(--accent);color:#1b1400;font-weight:700;padding:0 20px;border-radius:99px}
+.copy{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.85rem}
+
+/* floating */
+.fab{position:fixed;right:22px;bottom:22px;display:grid;gap:12px;z-index:90}
+.fab a,.fab button{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:1.6rem;box-shadow:var(--shadow-lg);transition:.25s}
+.fab a:hover,.fab button:hover{transform:scale(1.12)}
+.wa{background:#25d366;color:#fff}
+#top{background:var(--card);border:1px solid var(--line);font-size:1.2rem!important;opacity:0;pointer-events:none}
+#top.show{opacity:1;pointer-events:auto}
+
+/* modal + drawer */
+.overlay{position:fixed;inset:0;background:rgba(5,15,10,.6);backdrop-filter:blur(5px);z-index:300;opacity:0;pointer-events:none;transition:.3s;display:grid;place-items:center;padding:20px}
+.overlay.show{opacity:1;pointer-events:auto}
+.modal{background:var(--card);border-radius:28px;width:min(760px,100%);max-height:90vh;overflow:auto;transform:translateY(30px) scale(.96);transition:.35s;position:relative;box-shadow:var(--shadow-lg)}
+.overlay.show .modal{transform:none}
+.modal .thumb{height:210px;border-radius:28px 28px 0 0}
+.modal .mb{padding:30px}
+.close{position:absolute;top:14px;right:14px;z-index:5;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:1.2rem}
+.tbl{width:100%;border-collapse:collapse;margin:18px 0}
+.tbl td{padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.tbl td:first-child{color:var(--muted);width:40%}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--card);z-index:400;transform:translateX(105%);transition:.4s;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;border-left:1px solid var(--line)}
+.drawer.show{transform:none}
+.drawer header{padding:22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.drawer .list{flex:1;overflow:auto;padding:18px;display:grid;gap:12px;align-content:start}
+.item{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:16px}
+.item .em{font-size:1.8rem}
+.item .qty{margin-left:auto;display:flex;align-items:center;gap:8px}
+.item .qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);font-weight:700}
+.item .qty input{width:60px;padding:6px;text-align:center}
+.drawer footer{background:none;padding:18px;border-top:1px solid var(--line);color:inherit}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,100px);background:var(--text);color:var(--bg);padding:13px 24px;border-radius:99px;font-weight:600;z-index:500;transition:.4s;box-shadow:var(--shadow-lg)}
+.toast.show{transform:translate(-50%,0)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .hero .container,.split,.contact{grid-template-columns:1fr}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  footer .cols{grid-template-columns:1fr 1fr}
+  .hamburger{display:grid}
+  .menu{position:fixed;top:0;right:0;height:100%;width:min(300px,82%);background:var(--card);flex-direction:column;align-items:stretch;padding:90px 24px 24px;transform:translateX(105%);transition:.35s;z-index:150;box-shadow:var(--shadow-lg)}
+  .menu.open{transform:none}
+  .nav-cta{display:none}
+  section{padding:70px 0}
+  .visual{max-width:420px;margin-inline:auto;font-size:7rem}
+}
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  form.quote{grid-template-columns:1fr;padding:24px}
+  .search input{width:100%}.search{width:100%}
+  footer .cols{grid-template-columns:1fr}
+  .topbar .container>span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* =====================================================
+   LOGIN / AUTH  (new)
+   ===================================================== */
+.btn[hidden]{display:none}
+.toast{z-index:700}
+
+/* nav: login button + user menu */
+.nav-login{padding:10px 20px;font-size:.88rem}
+.user{position:relative}
+.user[hidden]{display:none}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 6px 16px rgba(15,107,79,.3);border:2px solid var(--card);outline:1px solid var(--line);transition:.25s}
+.avatar:hover{transform:translateY(-2px)}
+[data-theme="dark"] .avatar{color:#05150f}
+.udrop{position:absolute;right:0;top:calc(100% + 14px);width:250px;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);padding:10px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.25s;z-index:120}
+.user.open .udrop{opacity:1;transform:none;pointer-events:auto}
+.udrop .who{padding:10px 12px 12px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.udrop .who b{display:block;font-size:.95rem}
+.udrop .who small{color:var(--muted);word-break:break-all;font-size:.78rem}
+.udrop button{width:100%;text-align:left;padding:10px 12px;border-radius:10px;font-weight:600;font-size:.88rem;display:flex;gap:10px;align-items:center;transition:.2s}
+.udrop button:hover{background:var(--bg2)}
+.udrop button.out{color:#e5484d}
+
+/* full-screen auth page */
+.auth{position:fixed;inset:0;z-index:600;display:grid;grid-template-columns:1.05fr .95fr;background:var(--bg);opacity:0;visibility:hidden;transform:scale(1.02);transition:opacity .35s,transform .35s,visibility .35s}
+.auth.show{opacity:1;visibility:visible;transform:none}
+.auth-side{position:relative;overflow:hidden;color:#fff;padding:48px 60px;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(900px 520px at 90% -10%,var(--hero1),transparent 60%),linear-gradient(160deg,var(--hero2),#04110c)}
+.auth-side::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,#000 30%,transparent)}
+.auth-side .blob.b1{width:320px;height:320px;top:auto;bottom:-110px;right:-60px}
+.auth-side .blob.b2{width:260px;height:260px;top:-90px;left:-70px;bottom:auto}
+.auth-side .rel{position:relative;z-index:1}
+.auth-side .logo{color:#fff}
+.auth-side .logo small{color:#bcd8cc}
+.auth-side h2{font-size:clamp(2.1rem,3.4vw,3.1rem);margin:20px 0 16px}
+.auth-side h2 em{font-style:normal;color:var(--accent)}
+.auth-side p.lead{color:#cfe6dc;max-width:460px}
+.perks{display:grid;gap:12px;margin-top:32px;max-width:460px}
+.perk{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);transition:.25s}
+.perk:hover{background:rgba(255,255,255,.13);transform:translateX(6px)}
+.perk i{font-style:normal;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:1.3rem;flex:none}
+.perk b{display:block;font-size:.95rem}
+.perk span{font-size:.8rem;color:#bcd8cc}
+.auth-copy{font-size:.8rem;color:#9fc2b3}
+
+.auth-main{position:relative;display:flex;flex-direction:column;padding:40px 24px;overflow:auto}
+.auth-top{position:absolute;top:18px;right:18px;display:flex;gap:10px;z-index:2}
+.auth-logo{display:none;position:absolute;top:18px;left:20px;z-index:2}
+.auth-logo .logo{font-size:1.3rem}
+.auth-logo .logo-mark{width:34px;height:34px;font-size:1rem;border-radius:10px}
+.auth-box{width:min(440px,100%);margin:auto;padding:30px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;padding:5px;background:var(--bg2);border:1px solid var(--line);border-radius:99px;margin-bottom:30px}
+.seg button{padding:10px;border-radius:99px;font-weight:700;font-size:.9rem;color:var(--muted);transition:.25s}
+.seg button:hover{color:var(--text)}
+.seg button.on{background:var(--card);color:var(--brand);box-shadow:var(--shadow)}
+.auth-box h2{font-size:2.1rem;margin-bottom:8px}
+.auth-box .sub{color:var(--muted);margin-bottom:26px;font-size:.95rem}
+.fld{margin-bottom:16px}
+.af{position:relative}
+.af .i{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:.65;pointer-events:none}
+.af input{padding-left:44px}
+.af input.has-eye{padding-right:48px}
+.af .eye{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:1rem;opacity:.65;transition:.2s}
+.af .eye:hover{opacity:1;background:var(--bg2)}
+.msg{color:#e5484d;font-size:.76rem;font-weight:600;margin-top:5px}
+.msg:empty{display:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.opts{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 0 22px;font-size:.86rem}
+.chk{display:flex;gap:9px;align-items:center;font-weight:600;color:var(--muted);cursor:pointer;margin:0;font-size:.86rem}
+.chk input{width:17px;height:17px;padding:0;flex:none;accent-color:var(--brand)}
+.linkbtn{color:var(--brand);font-weight:700;font-size:.86rem}
+.linkbtn:hover{text-decoration:underline}
+.auth-box .btn-primary{width:100%;justify-content:center;padding:15px 26px}
+.btn.loading{pointer-events:none;opacity:.8}
+.btn.loading::after{content:"";width:16px;height:16px;border-radius:50%;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .7s linear infinite}
+.meter{height:5px;border-radius:9px;background:var(--line);margin-top:9px;overflow:hidden}
+.meter i{display:block;height:100%;width:0;border-radius:9px;transition:width .3s,background .3s}
+.mtxt{font-size:.74rem;color:var(--muted);margin-top:5px;font-weight:600}
+.auth-foot{text-align:center;margin-top:24px;color:var(--muted);font-size:.9rem}
+.auth-foot button{color:var(--brand);font-weight:700}
+.auth-foot button:hover{text-decoration:underline}
+.auth-note{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:22px;font-size:.76rem;color:var(--muted)}
+.auth-form[hidden]{display:none}
+.auth-form{animation:authIn .4s ease}
+@keyframes authIn{from{opacity:0;transform:translateY(12px)}}
+
+@media(max-width:980px){
+  .auth{grid-template-columns:1fr}
+  .auth-side{display:none}
+  .auth-logo{display:block}
+  .auth-box{padding-top:56px}
+}
+@media(max-width:600px){
+  .nav-login .lbl{display:none}
+  .nav-login{width:42px;height:42px;padding:0;justify-content:center;font-size:1.1rem}
+  .row2{grid-template-columns:1fr}
+  .auth-box h2{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div class="topbar">
+  <div class="container">
+    <span>📞 <a href="tel:+923332084244">+92 333 2084244</a> &nbsp;·&nbsp; ✉️ <a href="mailto:info@emazabrand.com">info@emazabrand.com</a></span>
+    <span>🌍 Exporting premium food products worldwide</span>
+  </div>
+</div>
+
+<header class="nav" id="nav">
+  <div class="container">
+    <a href="#home" class="logo"><span class="logo-mark">E</span><span>Emaza<small>EXPORT COMPANY</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="#home" class="active">Home</a>
+      <a href="#products">Products</a>
+      <a href="#why">Why Us</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+      <button class="icon-btn" id="cartBtn" aria-label="Inquiry list" title="Inquiry list">📋<span class="badge" id="badge">0</span></button>
+      <!-- Login (shown when logged out) -->
+      <button class="btn btn-outline nav-login" id="loginBtn" aria-label="Login"><span aria-hidden="true">👤</span><span class="lbl">Login</span></button>
+      <!-- User menu (shown when logged in) -->
+      <div class="user" id="userMenu" hidden>
+        <button class="avatar" id="avatar" aria-label="Account menu" aria-haspopup="true">U</button>
+        <div class="udrop" id="udrop">
+          <div class="who"><b id="uName">User</b><small id="uMail"></small></div>
+          <button data-act="inquiry">📋 My inquiry list</button>
+          <button data-act="quote">📨 Request a quote</button>
+          <button data-act="support">💬 WhatsApp support</button>
+          <button data-act="logout" class="out">🚪 Log out</button>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary nav-cta">Request a Quote</a>
+      <button class="icon-btn hamburger" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home" style="padding-top:110px">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="container">
+    <div>
+      <div class="pill"><i></i> Trusted exporter for 5+ years</div>
+      <h1>Quality food products, <em>delivered</em> to the world.</h1>
+      <p class="lead">Emaza supplies premium rice, cooking oil, wheat flour, brown sugar and sardine fish to importers, wholesalers and kitchens across the globe — with reliable logistics and uncompromising quality.</p>
+      <div class="cta">
+        <a href="#products" class="btn btn-primary">Explore Products →</a>
+        <a href="#contact" class="btn btn-ghost">Get a Free Quote</a>
+      </div>
+    </div>
+    <div class="hero-card rv">
+      <h3>🔥 Our Export Range</h3>
+      <div id="heroList"></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Our Products</span>
+      <h2 class="sec-title">Explore our wide range of products</h2>
+      <p class="sec-sub">Six carefully sourced products, packed to international standards. Add items to your inquiry list and send one combined quote request.</p>
+    </div>
+    <div class="tools rv">
+      <div class="chips" id="chips"></div>
+      <div class="search"><input id="q" type="search" placeholder="Search products…" aria-label="Search products"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats" style="padding:70px 0">
+  <div class="container">
+    <div class="wrap">
+      <div class="stat rv"><b data-t="5" data-s="+">0</b><span>Years as a trusted supplier</span></div>
+      <div class="stat rv"><b data-t="6" data-s="">0</b><span>Premium product lines</span></div>
+      <div class="stat rv"><b data-t="24" data-s="/7">0</b><span>Customer support</span></div>
+      <div class="stat rv"><b data-t="100" data-s="%">0</b><span>Satisfaction guarantee</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container split">
+    <div class="visual rv"><span>🛢️</span></div>
+    <div class="rv">
+      <span class="eyebrow">Why Choose Us</span>
+      <h2 class="sec-title">Emaza is your perfect kitchen companion</h2>
+      <p class="sec-sub">Pure ingredients, consistent quality and a supply chain you can depend on — from our facility to your warehouse.</p>
+      <div class="feat-list">
+        <div class="feat"><span class="n">01</span><div><b>Cholesterol-free</b><p>Heart-healthy and perfect for a balanced diet.</p></div></div>
+        <div class="feat"><span class="n">02</span><div><b>Enriched with Vitamins A & D</b><p>Essential vitamins for healthy skin and strong bones.</p></div></div>
+        <div class="feat"><span class="n">03</span><div><b>Ideal for deep-frying & daily cooking</b><p>Handles high heat while keeping food light and crispy.</p></div></div>
+        <div class="feat"><span class="n">04</span><div><b>Light texture, neutral taste</b><p>Enhances your dishes without overpowering them.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="alt">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Work Process</span>
+      <h2 class="sec-title">How can we help you</h2>
+      <p class="sec-sub">A simple, transparent journey from first call to final delivery.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="ic">📞</div><h3>Call us today</h3><p>Get in touch to discuss bulk orders, pricing and delivery options for your required products.</p></div>
+      <div class="step rv"><div class="ic">🤝</div><h3>Hassle-free service</h3><p>From placing your order to final delivery, we ensure smooth logistics and top-notch customer support.</p></div>
+      <div class="step rv"><div class="ic">✅</div><h3>All work guaranteed</h3><p>We stand by our quality — pay only when you're fully satisfied with the product and service.</p></div>
+    </div>
+    <div class="center rv" style="margin-top:40px"><a href="#contact" class="btn btn-primary">Request a Quote</a></div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets">
+  <div class="container center">
+    <div class="rv">
+      <span class="eyebrow">Global Reach</span>
+      <h2 class="sec-title">Shipping worldwide</h2>
+      <p class="sec-sub">We export globally and follow international quality and packaging standards. Tell us your destination and we'll arrange the rest.</p>
+    </div>
+    <div class="markets rv">
+      <span>🌏 Middle East</span><span>🌍 Africa</span><span>🌏 South Asia</span><span>🌏 Southeast Asia</span><span>🌍 Europe</span><span>🌎 Americas</span><span>🛳️ Sea Freight</span><span>✈️ Air Freight</span><span>📦 Custom Packaging</span><span>🏷️ Private Labeling</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="alt">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Got Questions</span>
+      <h2 class="sec-title">Frequently asked questions</h2>
+      <p class="sec-sub">Here are some of the more common questions we get asked.</p>
+    </div>
+    <div class="faq" id="faq"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Contact Us</span>
+      <h2 class="sec-title">Request a quote</h2>
+      <p class="sec-sub">You'll be satisfied with our work. Send your requirements and we'll reply with pricing and delivery details.</p>
+    </div>
+    <div class="contact">
+      <div class="info rv">
+        <a href="tel:+923332084244"><span class="ic">📞</span><span><small>Call us</small><b>+92 333 20 84 244</b></span></a>
+        <a href="https://wa.me/923332084244" target="_blank" rel="noopener"><span class="ic">💬</span><span><small>WhatsApp</small><b>Chat now</b></span></a>
+        <a href="mailto:info@emazabrand.com"><span class="ic">✉️</span><span><small>Email</small><b>info@emazabrand.com</b></span></a>
+        <div><span class="ic">⏱️</span><span><small>Typical lead time</small><b>7–14 business days</b></span></div>
+      </div>
+      <form class="quote rv" id="quoteForm" novalidate>
+        <div><label for="fn">Full name *</label><input id="fn" required placeholder="Your name"></div>
+        <div><label for="co">Company</label><input id="co" placeholder="Company name"></div>
+        <div><label for="em">Email *</label><input id="em" type="email" required placeholder="you@company.com"></div>
+        <div><label for="ph">Phone / WhatsApp</label><input id="ph" placeholder="+00 000 0000000"></div>
+        <div><label for="ct">Destination country *</label><input id="ct" required placeholder="e.g. UAE"></div>
+        <div><label for="pr">Product</label><select id="pr"></select></div>
+        <div class="full"><label for="qt">Approx. quantity</label><input id="qt" placeholder="e.g. 1 x 20ft container / 50 MT"></div>
+        <div class="full"><label for="ms">Message</label><textarea id="ms" placeholder="Packaging, branding, delivery terms…"></textarea></div>
+        <div class="full btns">
+          <button type="submit" class="btn btn-primary" data-via="wa">💬 Send via WhatsApp</button>
+          <button type="submit" class="btn btn-outline" data-via="mail">✉️ Send via Email</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <a href="#home" class="logo"><span class="logo-mark">E</span><span>Emaza</span></a>
+        <p>Your trusted products supplier. Premium food exports with reliable logistics.</p>
+        <form class="news" id="news"><input type="email" placeholder="Get offers & updates" required><button>Join</button></form>
+      </div>
+      <div><h4>Products</h4><ul id="fProd"></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#why">About Company</a></li><li><a href="#process">Work Process</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact us</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="tel:+923332084244">+92 333 20 84 244</a></li><li><a href="mailto:info@emazabrand.com">info@emazabrand.com</a></li><li><a href="https://wa.me/923332084244" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> Emaza. All rights reserved.</span><span>Privacy Policy · Terms & Conditions</span></div>
+  </div>
+</footer>
+
+<div class="fab">
+  <button id="top" aria-label="Back to top">↑</button>
+  <a class="wa" href="https://wa.me/923332084244?text=Hello%20Emaza%2C%20I%27d%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<!-- Product modal -->
+<div class="overlay" id="modalOv"><div class="modal" id="modal"></div></div>
+
+<!-- Inquiry drawer -->
+<div class="overlay" id="drawerOv" style="place-items:stretch"></div>
+<aside class="drawer" id="drawer">
+  <header><h3 style="font-family:'Plus Jakarta Sans'">📋 Inquiry list</h3><button class="icon-btn" id="drawerClose">✕</button></header>
+  <div class="list" id="cartList"></div>
+  <footer style="display:grid;gap:10px">
+    <button class="btn btn-primary" id="sendCart" style="justify-content:center">💬 Send inquiry via WhatsApp</button>
+    <button class="btn btn-outline" id="clearCart" style="justify-content:center">Clear list</button>
+  </footer>
+</aside>
+<div class="toast" id="toast"></div>
+
+<!-- ============ LOGIN / SIGN-UP PAGE ============ -->
+<div class="auth" id="auth" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+  <!-- Left brand panel -->
+  <div class="auth-side">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="rel">
+      <div class="logo"><span class="logo-mark">E</span><span>Emaza<small>EXPORT COMPANY</small></span></div>
+    </div>
+    <div class="rel">
+      <div class="pill"><i></i> Importer &amp; wholesaler portal</div>
+      <h2>Your global food supply, <em>one login</em> away.</h2>
+      <p class="lead">Sign in to save your inquiry list, request quotes faster and keep track of every order with Emaza.</p>
+      <div class="perks">
+        <div class="perk"><i>📋</i><div><b>Saved inquiry lists</b><span>Build once, request quotes anytime</span></div></div>
+        <div class="perk"><i>⚡</i><div><b>Faster quotes</b><span>Your details are pre-filled for you</span></div></div>
+        <div class="perk"><i>🚢</i><div><b>Worldwide shipping</b><span>Sea &amp; air freight, custom packaging</span></div></div>
+      </div>
+    </div>
+    <div class="rel auth-copy">© <span id="yr2"></span> Emaza · ISO &amp; HACCP standards</div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="auth-main">
+    <div class="auth-logo"><div class="logo"><span class="logo-mark">E</span><span>Emaza</span></div></div>
+    <div class="auth-top">
+      <button class="icon-btn" id="authTheme" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+      <button class="icon-btn" id="authClose" aria-label="Close">✕</button>
+    </div>
+
+    <div class="auth-box">
+      <div class="seg" id="seg">
+        <button type="button" data-tab="in" class="on">Admin Sign in</button>
+      </div>
+
+      <h2 id="authTitle">Welcome back</h2>
+      <p class="sub" id="authSub">Sign in to manage your inquiries and quotes.</p>
+
+      <!-- SIGN IN -->
+      <form class="auth-form" id="formIn" novalidate>
+        <div class="fld">
+          <label for="siEm">Email address</label>
+          <div class="af"><span class="i">✉️</span><input id="siEm" type="email" autocomplete="email" placeholder="you@company.com"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="fld">
+          <label for="siPw">Password</label>
+          <div class="af"><span class="i">🔒</span><input id="siPw" type="password" class="has-eye" autocomplete="current-password" placeholder="Enter your password"><button type="button" class="eye" data-eye="siPw" aria-label="Show password">👁️</button></div>
+          <div class="msg"></div>
+        </div>
+        <div class="opts">
+          <label class="chk"><input type="checkbox" id="siRem" checked> Remember me</label>
+          <button type="button" class="linkbtn" data-tab="fg">Forgot password?</button>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in →</button>
+        </form>
+
+
+      <!-- FORGOT -->
+      <form class="auth-form" id="formFg" novalidate hidden>
+        <div class="fld">
+          <label for="fgEm">Email address</label>
+          <div class="af"><span class="i">✉️</span><input id="fgEm" type="email" autocomplete="email" placeholder="you@company.com"></div>
+          <div class="msg"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:6px">Request password reset</button>
+        <p class="auth-foot"><button type="button" data-tab="in">← Back to sign in</button></p>
+      </form>
+
+      <div class="auth-note">🔐 <span>Your details are stored securely on this device.</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========== EDIT HERE =========== */
+const CONFIG = {
+  phone: "923332084244",           // WhatsApp number, international format, no + or spaces
+  email: "duaf210209@gmail.com"
+};
+const PRODUCTS = [
+  {id:1,name:"Mariana IRRI-6 Rice",cat:"Rice",em:"🍚",bg:"linear-gradient(135deg,#f6d365,#fda085)",
+   desc:"Premium-quality rice ideal for both household consumption and commercial kitchens.",
+   specs:["Long grain","Household & commercial","Export packing"],
+   table:[["Type","IRRI-6 White Rice"],["Best for","Households, restaurants, catering"],["Packaging","Custom bag sizes & branding"],["Lead time","7–14 business days"]]},
+  {id:2,name:"Sardine Fish",cat:"Seafood",em:"🐟",bg:"linear-gradient(135deg,#4facfe,#00c6a7)",
+   desc:"Sardine fish, locally known as Luar, named after the island of Sardinia where it was once found in abundance.",
+   specs:["Fresh / frozen","Rich in protein","Export grade"],
+   table:[["Type","Sardine (Luar)"],["Best for","Retail, canning, wholesale"],["Packaging","Export cartons"],["Lead time","7–14 business days"]]},
+  {id:3,name:"Kasuku IRRI-6 Rice",cat:"Rice",em:"🌾",bg:"linear-gradient(135deg,#d4fc79,#96e6a1)",
+   desc:"A reliable choice for budget-conscious households that don't compromise on quality.",
+   specs:["Value grade","Consistent quality","Bulk friendly"],
+   table:[["Type","IRRI-6 White Rice"],["Best for","Budget-conscious households, retail"],["Packaging","Custom bag sizes & branding"],["Lead time","7–14 business days"]]},
+  {id:4,name:"Wheat Flour",cat:"Flour",em:"🥖",bg:"linear-gradient(135deg,#fbd786,#f7797d)",
+   desc:"Premium flour milled from 100% whole wheat grains, delivering maximum freshness, nutrition and taste.",
+   specs:["100% whole wheat","Fresh milled","Nutritious"],
+   table:[["Type","Whole wheat flour"],["Best for","Bakeries, households, wholesale"],["Packaging","Custom sizes & branding"],["Lead time","7–14 business days"]]},
+  {id:5,name:"Emaza Cooking Oil",cat:"Oil",em:"🛢️",bg:"linear-gradient(135deg,#f9d423,#ff9a3c)",
+   desc:"Your perfect kitchen companion — pure, healthy and ideal for all types of cooking.",
+   specs:["Cholesterol-free","Vitamins A & D","Deep-frying ready"],
+   table:[["Range","Sunflower, canola, soybean, palm"],["Forms","Refined & crude"],["Standards","ISO & HACCP certified facilities"],["Packaging","Custom sizes, branding & labeling"]]},
+  {id:6,name:"Brown Sugar",cat:"Sugar",em:"🍬",bg:"linear-gradient(135deg,#c79081,#dfa579)",
+   desc:"Rich in molasses and natural sweetness — perfect for baking, cooking or sweetening beverages.",
+   specs:["Natural molasses","Baking & beverages","Bulk supply"],
+   table:[["Type","Brown sugar"],["Best for","Bakeries, cafés, food industry"],["Packaging","Custom sizes & branding"],["Lead time","7–14 business days"]]}
+];
+const FAQS = [
+  ["What types of cooking oil do you supply?","We provide a variety of high-quality cooking oils including sunflower oil, canola oil, soybean oil and palm oil — available in both refined and crude forms depending on your requirements."],
+  ["Do you export cooking oil internationally?","Yes, we export globally and comply with international quality and packaging standards to ensure safe and timely delivery to our clients worldwide."],
+  ["Can I place a bulk or customized order?","Absolutely! We specialize in bulk orders and can customize packaging sizes, branding and labeling to meet your specific business needs."],
+  ["What is the lead time for delivery?","Lead times vary based on quantity and destination, but most orders are processed and shipped within 7–14 business days."],
+  ["Are your products certified for quality and safety?","Yes, all our products are processed in certified facilities and meet national and international food safety standards such as ISO and HACCP."]
+];
+/* ================================= */
+
+const $ = (s,r=document)=>r.querySelector(s), $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* Theme */
+const root = document.documentElement, themeBtn = $('#themeBtn');
+function setTheme(t){ root.setAttribute('data-theme',t); themeBtn.textContent = t==='dark'?'☀️':'🌙'; const at=$('#authTheme'); if(at) at.textContent = t==='dark'?'☀️':'🌙'; store.set('emaza-theme',t); }
+setTheme(root.getAttribute('data-theme'));
+themeBtn.onclick = ()=> setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+
+/* Toast */
+let tt; function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* Hero list, marquee, footer, select */
+$('#heroList').innerHTML = PRODUCTS.slice(0,4).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${p.em}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
+const mq = PRODUCTS.map(p=>`<span>${p.em} ${p.name}</span>`).join('') + `<span>🚢 Worldwide shipping</span><span>🛡️ ISO & HACCP standards</span><span>📦 Custom packaging</span>`;
+$('#marquee').innerHTML = mq+mq;
+$('#fProd').innerHTML = PRODUCTS.map(p=>`<li><a href="#products" data-open="${p.id}">${p.name}</a></li>`).join('');
+$('#pr').innerHTML = `<option value="">Select a product</option>` + PRODUCTS.map(p=>`<option>${p.name}</option>`).join('');
+$('#yr').textContent = new Date().getFullYear();
+$('#yr2').textContent = new Date().getFullYear();
+
+/* Products grid + filters */
+let cat='All', term='';
+const cats=['All',...new Set(PRODUCTS.map(p=>p.cat))];
+$('#chips').innerHTML = cats.map(c=>`<button class="chip ${c==='All'?'on':''}" data-c="${c}">${c}</button>`).join('');
+$('#chips').onclick = e=>{const b=e.target.closest('.chip'); if(!b)return; cat=b.dataset.c; $$('.chip').forEach(x=>x.classList.toggle('on',x===b)); render();};
+$('#q').oninput = e=>{term=e.target.value.toLowerCase().trim(); render();};
+function render(){
+  const list = PRODUCTS.filter(p=>(cat==='All'||p.cat===cat) && (p.name+p.desc+p.cat).toLowerCase().includes(term));
+  $('#grid').innerHTML = list.length ? list.map(p=>`
+   <article class="card rv in">
+     <div class="thumb" style="background:${p.bg}"><span class="tag">${p.cat}</span><span class="num">0${p.id}</span><span>${p.em}</span></div>
+     <div class="body"><h3>${p.name}</h3><p>${p.desc}</p>
+       <div class="specs">${p.specs.map(s=>`<small>${s}</small>`).join('')}</div>
+       <div class="row"><button class="btn btn-outline" data-open="${p.id}">Details</button><button class="btn btn-primary" data-add="${p.id}">+ Add to inquiry</button></div>
+     </div></article>`).join('') : `<div class="empty">No products match your search.</div>`;
+}
+render();
+
+/* Modal */
+const modalOv=$('#modalOv'), modal=$('#modal');
+function openModal(id){
+  const p=PRODUCTS.find(x=>x.id==id); if(!p)return;
+  modal.innerHTML = `<button class="close" aria-label="Close">✕</button>
+    <div class="thumb" style="background:${p.bg}"><span class="tag">${p.cat}</span><span>${p.em}</span></div>
+    <div class="mb"><h2 style="font-size:2rem">${p.name}</h2><p style="color:var(--muted);margin-top:8px">${p.desc}</p>
+    <table class="tbl">${p.table.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td></tr>`).join('')}</table>
+    <div class="btns"><button class="btn btn-primary" data-add="${p.id}">+ Add to inquiry</button><a class="btn btn-outline" target="_blank" rel="noopener" href="https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('Hello Emaza, I am interested in '+p.name)}">💬 Ask on WhatsApp</a></div></div>`;
+  modalOv.classList.add('show');
+}
+const closeModal=()=>modalOv.classList.remove('show');
+modalOv.onclick=e=>{if(e.target===modalOv||e.target.closest('.close'))closeModal();};
+
+/* Inquiry cart */
+let cart=[]; try{cart=JSON.parse(store.get('emaza-cart')||'[]')}catch(e){cart=[]}
+const drawer=$('#drawer'), dOv=$('#drawerOv');
+function saveCart(){store.set('emaza-cart',JSON.stringify(cart));drawCart();}
+function addCart(id){
+  const p=PRODUCTS.find(x=>x.id==id); const f=cart.find(c=>c.id==id);
+  if(f)f.qty++; else cart.push({id:+id,qty:1});
+  saveCart(); toast(p.name+' added to inquiry');
+}
+function drawCart(){
+  const n=cart.reduce((a,c)=>a+c.qty,0); const b=$('#badge'); b.textContent=cart.length; b.style.display=cart.length?'grid':'none';
+  $('#cartList').innerHTML = cart.length ? cart.map(c=>{const p=PRODUCTS.find(x=>x.id==c.id);return `<div class="item"><span class="em">${p.em}</span><div><b>${p.name}</b><br><small style="color:var(--muted)">Quantity (MT)</small></div>
+   <div class="qty"><button data-m="${c.id}">−</button><input type="number" min="1" value="${c.qty}" data-q="${c.id}"><button data-p="${c.id}">+</button></div></div>`}).join('')
+   : `<p style="color:var(--muted);text-align:center;padding:40px 10px">Your inquiry list is empty.<br>Add products to request one combined quote.</p>`;
+}
+drawCart();
+const openDrawer=()=>{drawer.classList.add('show');dOv.classList.add('show')}, closeDrawer=()=>{drawer.classList.remove('show');dOv.classList.remove('show')};
+$('#cartBtn').onclick=openDrawer; $('#drawerClose').onclick=closeDrawer; dOv.onclick=closeDrawer;
+$('#cartList').addEventListener('click',e=>{
+  const m=e.target.closest('[data-m]'), p=e.target.closest('[data-p]');
+  if(m){const c=cart.find(x=>x.id==m.dataset.m); c.qty--; if(c.qty<1)cart=cart.filter(x=>x!==c); saveCart();}
+  if(p){cart.find(x=>x.id==p.dataset.p).qty++; saveCart();}
+});
+$('#cartList').addEventListener('change',e=>{const i=e.target.closest('[data-q]'); if(i){const c=cart.find(x=>x.id==i.dataset.q); c.qty=Math.max(1,parseInt(i.value)||1); saveCart();}});
+$('#clearCart').onclick=()=>{cart=[];saveCart();};
+$('#sendCart').onclick=()=>{
+  if(!cart.length){toast('Add at least one product first');return;}
+  const lines=cart.map(c=>`• ${PRODUCTS.find(p=>p.id==c.id).name} — ${c.qty} MT`).join('\n');
+  window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('Hello Emaza, I would like a quote for:\n'+lines)}`,'_blank');
+};
+
+/* Global click delegation */
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]'); if(o){e.preventDefault();openModal(o.dataset.open);}
+  const a=e.target.closest('[data-add]'); if(a){addCart(a.dataset.add);}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();$('#menu').classList.remove('open');}});
+
+/* FAQ */
+$('#faq').innerHTML = FAQS.map(f=>`<div class="qa"><button aria-expanded="false">${f[0]}<i>+</i></button><div class="ans"><p>${f[1]}</p></div></div>`).join('');
+$('#faq').onclick=e=>{
+  const b=e.target.closest('button'); if(!b)return; const qa=b.parentElement, ans=$('.ans',qa), open=qa.classList.contains('open');
+  $$('.qa').forEach(x=>{x.classList.remove('open');$('.ans',x).style.maxHeight=0;$('button',x).setAttribute('aria-expanded','false');});
+  if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';b.setAttribute('aria-expanded','true');}
+};
+
+/* Quote form */
+let via='wa';
+$$('#quoteForm button[type=submit]').forEach(b=>b.addEventListener('click',()=>via=b.dataset.via));
+$('#quoteForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const req=['fn','em','ct'].map(id=>$('#'+id)); let ok=true;
+  req.forEach(i=>{const bad=!i.value.trim()||(i.type==='email'&&!/^\S+@\S+\.\S+$/.test(i.value)); i.classList.toggle('err',bad); if(bad)ok=false;});
+  if(!ok){toast('Please fill the required fields');return;}
+  const v=id=>$('#'+id).value.trim();
+  const cartTxt = cart.length ? '\nInquiry list:\n'+cart.map(c=>`• ${PRODUCTS.find(p=>p.id==c.id).name} — ${c.qty} MT`).join('\n') : '';
+  const body=`Name: ${v('fn')}\nCompany: ${v('co')||'-'}\nEmail: ${v('em')}\nPhone: ${v('ph')||'-'}\nDestination: ${v('ct')}\nProduct: ${v('pr')||'-'}\nQuantity: ${v('qt')||'-'}\nMessage: ${v('ms')||'-'}${cartTxt}`;
+  if(via==='wa') window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('New quote request:\n'+body)}`,'_blank');
+  else location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Quote request – '+v('fn'))}&body=${encodeURIComponent(body)}`;
+  toast('Opening your message…');
+});
+$('#news').onsubmit=e=>{e.preventDefault();toast('Thanks for subscribing!');e.target.reset();};
+
+/* Mobile menu */
+$('#burger').onclick=()=>$('#menu').classList.toggle('open');
+$$('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.remove('open'));
+
+/* Scroll: progress, sticky shadow, back-to-top, active link */
+const secs=$$('main section[id]'), links=$$('#menu a');
+addEventListener('scroll',()=>{
+  const h=document.documentElement, st=h.scrollTop, max=h.scrollHeight-h.clientHeight;
+  $('#progress').style.width=(st/max*100)+'%';
+  $('#nav').classList.toggle('scrolled',st>20);
+  $('#top').classList.toggle('show',st>600);
+  let cur='home'; secs.forEach(s=>{if(st+140>=s.offsetTop)cur=s.id;});
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+},{passive:true});
+$('#top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* Reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return; en.target.classList.add('in'); io.unobserve(en.target);
+  const b=$('b[data-t]',en.target);
+  if(b){const t=+b.dataset.t,s=b.dataset.s;let n=0;const step=Math.max(1,Math.ceil(t/50));const id=setInterval(()=>{n=Math.min(t,n+step);b.textContent=n+s;if(n>=t)clearInterval(id);},28);}
+}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
+
+/* =====================================================
+   LOGIN / SIGN-UP  (front-end demo: accounts are kept in
+   this browser's localStorage. For real accounts connect
+   these handlers to your backend / auth API.)
+   ===================================================== */
+const authEl=$('#auth'), EMAIL=/^\S+@\S+\.\S+$/, SKEY='emaza-session', UKEY='emaza-users';
+const ss={get(k){try{return sessionStorage.getItem(k)}catch(e){return null}},set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}},del(k){try{sessionStorage.removeItem(k)}catch(e){}}};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const users=()=>{try{return JSON.parse(store.get(UKEY)||'[]')}catch(e){return[]}};
+const saveUsers=u=>store.set(UKEY,JSON.stringify(u));
+async function hash(s){
+  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('emaza::'+s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+  catch(e){return btoa(unescape(encodeURIComponent('emaza::'+s)));}
+}
+const getSess=()=>{try{return JSON.parse(store.get(SKEY)||ss.get(SKEY)||'null')}catch(e){return null}};
+function setSess(u,remember){
+  const d=JSON.stringify({name:u.name,email:u.email,company:u.company||''});
+  try{localStorage.removeItem(SKEY)}catch(e){} ss.del(SKEY);
+  remember?store.set(SKEY,d):ss.set(SKEY,d);
+}
+function endSess(){try{localStorage.removeItem(SKEY)}catch(e){} ss.del(SKEY);}
+const firstName=n=>(n||'').trim().split(/\s+/)[0]||'there';
+
+/* field helpers */
+function fe(input,msg){
+  const f=input.closest('.fld'), m=f&&$('.msg',f);
+  input.classList.toggle('err',!!msg); if(m)m.textContent=msg||'';
+  return !msg;
+}
+function busy(btn,on){btn.classList.toggle('loading',on);}
+authEl.addEventListener('input',e=>{ if(e.target.matches('input')) fe(e.target,''); });
+
+/* Navbar state */
+function renderUser(){
+  const s=getSess();
+  $('#loginBtn').hidden=!!s; $('#userMenu').hidden=!s;
+  if(!s){$('#userMenu').classList.remove('open');return;}
+  $('#avatar').textContent=(s.name||'U').trim().charAt(0).toUpperCase();
+  $('#uName').textContent=s.name; $('#uMail').textContent=s.email;
+  /* prefill quote form */
+  [['fn',s.name],['em',s.email],['co',s.company]].forEach(([id,val])=>{const i=$('#'+id); if(i&&val&&!i.value)i.value=val;});
+}
+renderUser();
+
+/* Open / close */
+const TXT={
+  in:['Welcome back','Sign in to manage your inquiries and quotes.'],
+  up:['Create your account','Join Emaza to save inquiries and get quotes faster.'],
+  fg:['Reset password','Enter your email and we\'ll send you reset instructions.']
+};
+function setMode(m){
+  $('#formIn').hidden=m!=='in';
+  $('#formFg').hidden=m!=='fg';
+  $('#seg').style.display = m==='fg'?'none':'';
+  $$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.tab===m));
+  $('#authTitle').textContent=TXT[m][0]; $('#authSub').textContent=TXT[m][1];
+  $$('#auth .msg').forEach(x=>x.textContent=''); $$('#auth input').forEach(i=>i.classList.remove('err'));
+  const f={in:'#siEm',up:'#suNm',fg:'#fgEm'}[m]; setTimeout(()=>{const i=$(f); i&&i.focus({preventScroll:true});},120);
+}
+function openAuth(m='in'){
+  $('#menu').classList.remove('open'); closeDrawer(); closeModal();
+  authEl.classList.add('show'); authEl.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden'; setMode(m);
+}
+function closeAuth(){
+  authEl.classList.remove('show'); authEl.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+function done(msg){renderUser();closeAuth();toast(msg);}
+
+$('#loginBtn').onclick=()=>openAuth('in');
+$('#authClose').onclick=closeAuth;
+$('#authTheme').onclick=()=>themeBtn.click();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&authEl.classList.contains('show'))closeAuth();});
+authEl.addEventListener('click',e=>{
+  const t=e.target.closest('[data-tab]'); if(t){setMode(t.dataset.tab);return;}
+  const eye=e.target.closest('[data-eye]');
+  if(eye){const i=$('#'+eye.dataset.eye); const show=i.type==='password'; i.type=show?'text':'password'; eye.textContent=show?'🙈':'👁️'; eye.setAttribute('aria-label',show?'Hide password':'Show password');}
+});
+
+/* Password strength */
+$('#suPw').addEventListener('input',e=>{
+  const v=e.target.value; let s=0;
+  if(v.length>=8)s++; if(/[a-z]/.test(v)&&/[A-Z]/.test(v))s++; if(/\d/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++;
+  if(!v)s=0;
+  const L=[['0%','var(--line)','Use 8+ characters with letters, numbers & symbols'],['25%','#e5484d','Weak'],['50%','#f5a524','Fair'],['75%','#7cc24a','Good'],['100%','#16a37a','Strong']][s];
+  const bar=$('#meterBar'); bar.style.width=L[0]; bar.style.background=L[1]; $('#meterTxt').textContent=L[2];
+});
+
+/* Sign in */
+$('#formIn').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const em=$('#siEm'), pw=$('#siPw'), mail=em.value.trim().toLowerCase();
+  const okE=fe(em,EMAIL.test(mail)?'':'Enter a valid email address');
+  const okP=fe(pw,pw.value?'':'Enter your password');
+  if(!okE||!okP)return;
+  const btn=$('button[type=submit]',e.target); busy(btn,true);
+  const h=await hash(pw.value); await sleep(600); busy(btn,false);
+  const u=users().find(x=>x.email===mail);
+  if(!u||u.hash!==h){fe(pw,'Incorrect email or password');return;}
+  setSess(u,$('#siRem').checked); e.target.reset();
+  done('Welcome back, '+firstName(u.name)+' 👋');
+});
+
+/* Sign up */
+$('#formUp').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const nm=$('#suNm'), co=$('#suCo'), em=$('#suEm'), pw=$('#suPw'), pc=$('#suPc'), tc=$('#suTc');
+  const mail=em.value.trim().toLowerCase(); let ok=true;
+  ok=fe(nm,nm.value.trim().length>=2?'':'Please enter your full name')&&ok;
+  ok=fe(em,!EMAIL.test(mail)?'Enter a valid email address':(users().some(x=>x.email===mail)?'An account with this email already exists':''))&&ok;
+  ok=fe(pw,pw.value.length>=8?'':'Password must be at least 8 characters')&&ok;
+  ok=fe(pc,pc.value===pw.value&&pc.value?'':'Passwords do not match')&&ok;
+  const tm=$('.msg',tc.closest('.fld')); tm.textContent=tc.checked?'':'Please accept the terms to continue'; if(!tc.checked)ok=false;
+  if(!ok)return;
+  const btn=$('button[type=submit]',e.target); busy(btn,true);
+  const h=await hash(pw.value); await sleep(700); busy(btn,false);
+  const u={name:nm.value.trim(),company:co.value.trim(),email:mail,hash:h,created:Date.now()};
+  const all=users(); all.push(u); saveUsers(all);
+  setSess(u,true); e.target.reset(); $('#meterBar').style.width='0'; $('#meterTxt').textContent='Use 8+ characters with letters, numbers & symbols';
+  done('Account created. Welcome, '+firstName(u.name)+' 🎉');
+});
+
+/* Forgot password (opens an email to support) */
+$('#formFg').addEventListener('submit',e=>{
+  e.preventDefault();
+  const em=$('#fgEm'), mail=em.value.trim();
+  if(!fe(em,EMAIL.test(mail)?'':'Enter a valid email address'))return;
+  location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Password reset request')}&body=${encodeURIComponent('Hello Emaza, please help me reset the password for my account: '+mail)}`;
+  e.target.reset(); setMode('in'); toast('Opening your email to request a reset…');
+});
+
+/* User menu */
+$('#avatar').onclick=e=>{e.stopPropagation();$('#userMenu').classList.toggle('open');};
+document.addEventListener('click',e=>{if(!e.target.closest('#userMenu'))$('#userMenu').classList.remove('open');});
+$('#udrop').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b)return; $('#userMenu').classList.remove('open');
+  const a=b.dataset.act;
+  if(a==='inquiry')openDrawer();
+  if(a==='quote')location.hash='#contact';
+  if(a==='support')window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('Hello Emaza, I need some help with my account.')}`,'_blank');
+  if(a==='logout'){endSess();renderUser();toast('You have been logged out');}
+});
+</script>
+</body>
+</html>
