@@ -1,112 +1,114 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGRO CORP LTD   | Admin Dashboard</title>
-<style>
-
-</style>
-</head>
-<body>
-
-
-<script>
-
-}
-</script>
-</body>
-</html> -->
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AGRO CORP LTD   Admin Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGRO CORP LTD | Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+<div class="layout">
 
-  <h1>AGRO CORP LTD   Admin Dashboard</h1>
-  <p id="status">Checking admin access...</p>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">AGRO CORP LTD<small>Export admin</small></div>
+    <nav>
+      <button class="nav active" data-view="dashboard">Dashboard</button>
+      <button class="nav" data-view="inquiries">All inquiries</button>
+      <button class="nav" data-view="messages">Messages</button>
+      <button class="nav" data-view="products">Products</button>
+      <button class="nav" data-view="settings">Settings</button>
+    </nav>
+    <a class="back" href="index.html">← Back to website</a>
+  </aside>
 
-  <button id="logoutBtn" hidden>Logout</button>
+  <main class="main">
+    <header class="top">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <div>
+        <h1 id="pageTitle">Dashboard overview</h1>
+        <p id="status">Checking admin access…</p>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+        <button class="btn" id="logoutBtn" hidden>Log out</button>
+      </div>
+    </header>
 
+    <!-- DASHBOARD -->
+    <section class="view" id="view-dashboard">
+      <div class="stats">
+        <div class="stat"><p>Total inquiries</p><h2 id="total">0</h2></div>
+        <div class="stat s-new"><p>New</p><h2 id="new">0</h2></div>
+        <div class="stat s-prog"><p>In progress</p><h2 id="progress">0</h2></div>
+        <div class="stat s-done"><p>Completed</p><h2 id="completed">0</h2></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Latest inquiries</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Customer</th><th>Product</th><th>Country</th><th>Status</th></tr></thead>
+            <tbody id="recentRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-  <div class="layout">
+    <!-- INQUIRIES -->
+    <section class="view" id="view-inquiries" hidden>
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Customer inquiries</h3>
+          <div class="tools">
+            <select id="statusFilter" aria-label="Filter by status">
+              <option value="">All statuses</option>
+              <option value="new">New</option>
+              <option value="in_progress">In progress</option>
+              <option value="completed">Completed</option>
+            </select>
+            <input class="search" id="search" type="search" placeholder="Search inquiries…" aria-label="Search inquiries">
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Customer</th><th>Company</th><th>Product</th><th>Country</th><th>Quantity</th><th>Date</th><th>Status</th></tr>
+            </thead>
+            <tbody id="inquiryRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
-<aside class="sidebar">
-<div class="logo">AGRO CORP LTD  </div>
-<div class="sub">FOOD EXPORT ADMIN</div>
-<nav>
-<a class="nav active" href="#dashboard">▦ Dashboard</a>
-<a class="nav" href="#inquiries">▤ All Inquiries</a>
-<a class="nav" href="#messages">✉ Messages</a>
-<a class="nav" href="#products">□ Products</a>
-<a class="nav" href="#settings">⚙ Settings</a>
-</nav>
-</aside>
+    <!-- MESSAGES -->
+    <section class="view" id="view-messages" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>Customer messages</h3></div>
+        <div id="messageList" class="msg-list"></div>
+      </div>
+    </section>
 
-<main class="main">
-<header class="top">
-<div>
-<h1>Dashboard Overview</h1>
-<p>Welcome back, Admin. Here's your business overview.</p>
+    <!-- PRODUCTS -->
+    <section class="view" id="view-products" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>Products</h3></div>
+        <p class="empty">Product management will be connected to the database in the next stage.</p>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>Admin account</h3></div>
+        <p class="empty" style="text-align:left">Signed in as <b id="adminMail">—</b></p>
+      </div>
+    </section>
+  </main>
 </div>
-<button class="logout" onclick="alert('Connect Supabase logout here')">Logout ↗</button>
-</header>
 
-<section class="stats" id="dashboard">
-<div class="card"><p>Total Inquiries</p><h2 id="total">0</h2></div>
-<div class="card"><p>New Inquiries</p><h2 id="new">0</h2></div>
-<div class="card"><p>In Progress</p><h2 id="progress">0</h2></div>
-<div class="card"><p>Completed</p><h2 id="completed">0</h2></div>
-</section>
-
-<section class="section" id="inquiries">
-<div class="section-head">
-<h3>Recent Customer Inquiries</h3>
-<input class="search" id="search" placeholder="Search inquiries..." oninput="filterRows()">
-</div>
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Customer</th><th>Company</th><th>Product</th>
-<th>Country</th><th>Quantity</th><th>Status</th><th>Action</th>
-</tr>
-</thead>
-<tbody id="inquiryRows">
-<tr><td colspan="7">No inquiries loaded yet. Connect Supabase to display customer inquiries.</td></tr>
-</tbody>
-</table>
-</div>
-</section>
-
-<section class="section" id="messages">
-<h3>Messages & Replies</h3>
-<p class="activity">Customer messages and admin replies will appear here after database integration.</p>
-</section>
-
-<section class="section" id="products">
-<h3>Product Management</h3>
-<p class="activity">Product management can be connected to your database in the next stage.</p>
-</section>
-
-<section class="section" id="settings">
-<h3>Admin Settings</h3>
-<p class="activity">Your admin account and dashboard settings.</p>
-</section>
-
-</main>
-</div>
-
-
-<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>
-

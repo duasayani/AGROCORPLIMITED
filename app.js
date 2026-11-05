@@ -296,11 +296,24 @@ $('#quoteForm').addEventListener('submit',e=>{
   const v=id=>$('#'+id).value.trim();
   const cartTxt = cart.length ? '\nInquiry list:\n'+cart.map(c=>`• ${PRODUCTS.find(p=>p.id==c.id).name} — ${c.qty} MT`).join('\n') : '';
   const body=`Name: ${v('fn')}\nCompany: ${v('co')||'-'}\nEmail: ${v('em')}\nPhone: ${v('ph')||'-'}\nDestination: ${v('ct')}\nProduct: ${v('pr')||'-'}\nQuantity: ${v('qt')||'-'}\nMessage: ${v('ms')||'-'}${cartTxt}`;
+
+  /* NEW: inquiry Supabase mein save karo (dashboard mein dikhegi) */
+  supabaseClient.from('inquiries').insert({
+    full_name: v('fn'),
+    company:   v('co'),
+    email:     v('em'),
+    phone:     v('ph'),
+    country:   v('ct'),
+    product:   v('pr') || cart.map(c=>PRODUCTS.find(p=>p.id==c.id).name).join(', '),
+    quantity:  v('qt'),
+    message:   v('ms') + cartTxt,
+    status:    'new'
+  }).then(({error})=>{ if(error) console.error('Inquiry save failed:', error); });
+
   if(via==='wa') window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('New quote request:\n'+body)}`,'_blank');
   else location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Quote request – '+v('fn'))}&body=${encodeURIComponent(body)}`;
   toast('Opening your message…');
 });
-$('#news').onsubmit=e=>{e.preventDefault();toast('Thanks for subscribing!');e.target.reset();};
 
 /* Mobile menu */
 $('#burger').onclick=()=>$('#menu').classList.toggle('open');
@@ -489,54 +502,3 @@ $('#udrop').addEventListener('click',e=>{
 
 
 
-
-// DASHBOARD.HTML
-
- const SUPABASE_URL = "https://firqrpeemkxtvdkhnwpx.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_DC8XvOjUsac-vzmXh5cKQQ_gJjwGrh3";
-
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-    async function checkAdmin() {
-      const status = document.getElementById('status');
-
-      const { data: { session }, error } =
-        await supabaseClient.auth.getSession();
-
-      if (error || !session) {
-        window.location.replace('index.html');
-        return;
-      }
-
-      const { data: admin, error: adminError } =
-        await supabaseClient
-          .from('admin_users')
-          .select('user_id')
-          .eq('user_id', session.user.id)
-          .maybeSingle();
-
-      if (adminError || !admin) {
-        await supabaseClient.auth.signOut();
-        window.location.replace('index.html');
-        return;
-      }
-
-      status.textContent = 'Welcome, Admin! You are securely logged in.';
-      document.getElementById('logoutBtn').hidden = false;
-    }
-
-    document.getElementById('logoutBtn').onclick = async () => {
-      await supabaseClient.auth.signOut();
-      window.location.replace('index.html');
-    };
-
-    checkAdmin();
-
-    function filterRows(){
- const q=document.getElementById('search').value.toLowerCase();
- document.querySelectorAll('#inquiryRows tr').forEach(row=>{
-  row.style.display=row.innerText.toLowerCase().includes(q)?'':'none';
- });
