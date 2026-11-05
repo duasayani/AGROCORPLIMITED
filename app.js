@@ -149,7 +149,7 @@ function imgFail(img){
   span.className='img-fallback'; span.textContent=img.dataset.em||'📦';
   img.replaceWith(span);
 }
-const pimg=(p,cls='product-img')=>`<img src="${p.image}" alt="${p.name}" class="${cls}" data-em="${p.em}" ${cls==='product-img'?'loading="lazy" ':''}decoding="async" onerror="imgFail(this)">`;
+const pimg=(p,cls='product-img')=>`<img src="${p.image}" alt="${p.name}" class="${cls}" data-em="${p.em}" loading="eager" onerror="imgFail(this)">`;
 
 /* Hero list, marquee, footer, select */
 $('#heroList').innerHTML = PRODUCTS.slice(0,4).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${pimg(p,'mini-img')}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
@@ -185,9 +185,12 @@ render();
    { src: "images/photo.jpg", title: "Caption", album: "Album name" }
    ===================================================== */
 const GALLERY = [
-  ...PRODUCTS.map(p=>({src:p.image, title:p.name, album:'Products'})),
-  // { src:"images/warehouse-1.jpg", title:"Our warehouse",  album:"Warehouse" },
-  // { src:"images/container-1.jpg", title:"Container loading", album:"Shipping" },
+  // ...PRODUCTS.map(p=>({src:p.image, title:p.name, album:'Products'})),
+  { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Open%20Container%20Packed%20with%20Yellow%20Bales.png", title:"Open Containers",  album:"Warehouse" },
+  { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Industrial%20Yard%20with%20Yellow%20Bale%20Containers.png", title:"Container loading", album:"Shipping" },
+  { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Premium%20Rice%20Sacks%20in%20Warehouse%20Storage.png", title:"Rice Sacks", album:"Shipping" },
+  { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Yellow%20Cargo%20Bales%20in%20Open%20Shipping%20Container.png", title:"Open Shipping Container", album:"Shipping" },
+
 ];
 let galAlbum='All', galList=[], lbIdx=0;
 const albums=['All',...new Set(GALLERY.map(g=>g.album))];
@@ -196,7 +199,7 @@ function renderGallery(){
   galList = GALLERY.filter(g=>galAlbum==='All'||g.album===galAlbum);
   $('#galGrid').innerHTML = galList.map((g,i)=>`
     <button class="gal-item rv in" data-gi="${i}" aria-label="View ${g.title}">
-      <img src="${g.src}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.closest('.gal-item').remove()">
+      <img src="${g.src}" alt="${g.title}" loading="eager" onerror="this.closest('.gal-item').remove()">
       <span class="gal-cap"><b>${g.title}</b><small>${g.album}</small></span>
     </button>`).join('');
 }
