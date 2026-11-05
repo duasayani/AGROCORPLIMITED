@@ -29,6 +29,7 @@
     <nav class="menu" id="menu">
       <a href="#home" class="active">Home</a>
       <a href="#products">Products</a>
+      <a href="#gallery">Gallery</a>
       <a href="#why">Why Us</a>
       <a href="#process">Process</a>
       <a href="#faq">FAQs</a>
@@ -94,6 +95,19 @@
       <div class="search"><input id="q" type="search" placeholder="Search products…" aria-label="Search products"></div>
     </div>
     <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="center rv">
+      <span class="eyebrow">Gallery</span>
+      <h2 class="sec-title">Our photo album</h2>
+      <p class="sec-sub">A look at our products, packaging and export operations. Tap any photo to view it full size.</p>
+    </div>
+    <div class="chips gal-tabs rv" id="galTabs"></div>
+    <div class="gal-grid" id="galGrid"></div>
   </div>
 </section>
 
@@ -166,7 +180,7 @@
       <h2 class="sec-title">Frequently asked questions</h2>
       <p class="sec-sub">Here are some of the more common questions we get asked.</p>
     </div>
-    <div class="faq" id="faq"></div>
+    <div class="faq" id="faqList"></div>
   </div>
 </section>
 
@@ -223,6 +237,14 @@
 <div class="fab">
   <button id="top" aria-label="Back to top">↑</button>
   <a class="wa" href="https://wa.me/923332084244?text=Hello%20Emaza%2C%20I%27d%20like%20to%20know%20more%20about%20your%20products." target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<!-- Gallery lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
 </div>
 
 <!-- Product modal -->

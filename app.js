@@ -143,8 +143,16 @@ themeBtn.onclick = ()=> setTheme(root.getAttribute('data-theme')==='dark'?'light
 /* Toast */
 let tt; function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2200);}
 
+/* Image helpers: if an image fails to load, fall back to the emoji so nothing looks broken */
+function imgFail(img){
+  const span=document.createElement('span');
+  span.className='img-fallback'; span.textContent=img.dataset.em||'📦';
+  img.replaceWith(span);
+}
+const pimg=(p,cls='product-img')=>`<img src="${p.image}" alt="${p.name}" class="${cls}" data-em="${p.em}" ${cls==='product-img'?'loading="lazy" ':''}decoding="async" onerror="imgFail(this)">`;
+
 /* Hero list, marquee, footer, select */
-$('#heroList').innerHTML = PRODUCTS.slice(0,4).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${p.em}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
+$('#heroList').innerHTML = PRODUCTS.slice(0,4).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${pimg(p,'mini-img')}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
 const mq = PRODUCTS.map(p=>`<span>${p.em} ${p.name}</span>`).join('') + `<span>🚢 Worldwide shipping</span><span>🛡️ ISO & HACCP standards</span><span>📦 Custom packaging</span>`;
 $('#marquee').innerHTML = mq+mq;
 $('#fProd').innerHTML = PRODUCTS.map(p=>`<li><a href="#products" data-open="${p.id}">${p.name}</a></li>`).join('');
@@ -162,7 +170,7 @@ function render(){
   const list = PRODUCTS.filter(p=>(cat==='All'||p.cat===cat) && (p.name+p.desc+p.cat).toLowerCase().includes(term));
   $('#grid').innerHTML = list.length ? list.map(p=>`
    <article class="card rv in">
-     <div class="thumb" style="background:${p.bg}"><img src="${p.image}" alt="${p.name}" class="product-img"></div>
+     <div class="thumb" style="background:${p.bg}">${pimg(p)}</div>
      <div class="body"><h3>${p.name}</h3><p>${p.desc}</p>
        <div class="specs">${p.specs.map(s=>`<small>${s}</small>`).join('')}</div>
        <div class="row"><button class="btn btn-outline" data-open="${p.id}">Details</button><button class="btn btn-primary" data-add="${p.id}">+ Add to inquiry</button></div>
@@ -170,12 +178,56 @@ function render(){
 }
 render();
 
+
+/* =====================================================
+   GALLERY / PHOTO ALBUM
+   To add your own photos: add a line to GALLERY below.
+   { src: "images/photo.jpg", title: "Caption", album: "Album name" }
+   ===================================================== */
+const GALLERY = [
+  ...PRODUCTS.map(p=>({src:p.image, title:p.name, album:'Products'})),
+  // { src:"images/warehouse-1.jpg", title:"Our warehouse",  album:"Warehouse" },
+  // { src:"images/container-1.jpg", title:"Container loading", album:"Shipping" },
+];
+let galAlbum='All', galList=[], lbIdx=0;
+const albums=['All',...new Set(GALLERY.map(g=>g.album))];
+$('#galTabs').innerHTML = albums.map(a=>`<button class="chip ${a==='All'?'on':''}" data-album="${a}">${a}</button>`).join('');
+function renderGallery(){
+  galList = GALLERY.filter(g=>galAlbum==='All'||g.album===galAlbum);
+  $('#galGrid').innerHTML = galList.map((g,i)=>`
+    <button class="gal-item rv in" data-gi="${i}" aria-label="View ${g.title}">
+      <img src="${g.src}" alt="${g.title}" loading="lazy" decoding="async" onerror="this.closest('.gal-item').remove()">
+      <span class="gal-cap"><b>${g.title}</b><small>${g.album}</small></span>
+    </button>`).join('');
+}
+$('#galTabs').onclick=e=>{
+  const b=e.target.closest('[data-album]'); if(!b)return;
+  galAlbum=b.dataset.album; $$('#galTabs .chip').forEach(x=>x.classList.toggle('on',x===b)); renderGallery();
+};
+renderGallery();
+
+const lb=$('#lightbox');
+function showLb(i){
+  if(!galList.length)return;
+  lbIdx=(i+galList.length)%galList.length; const g=galList[lbIdx];
+  $('#lbImg').src=g.src; $('#lbImg').alt=g.title; $('#lbCap').textContent=g.title+' · '+(lbIdx+1)+' / '+galList.length;
+}
+function openLb(i){showLb(i); lb.classList.add('show'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow='';}
+$('#galGrid').addEventListener('click',e=>{const b=e.target.closest('[data-gi]'); if(b)openLb(+b.dataset.gi);});
+$('#lbClose').onclick=closeLb; $('#lbPrev').onclick=()=>showLb(lbIdx-1); $('#lbNext').onclick=()=>showLb(lbIdx+1);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('show'))return;
+  if(e.key==='Escape')closeLb(); if(e.key==='ArrowLeft')showLb(lbIdx-1); if(e.key==='ArrowRight')showLb(lbIdx+1);
+});
+
 /* Modal */
 const modalOv=$('#modalOv'), modal=$('#modal');
 function openModal(id){
   const p=PRODUCTS.find(x=>x.id==id); if(!p)return;
   modal.innerHTML = `<button class="close" aria-label="Close">✕</button>
-    <div class="thumb" style="background:${p.bg}"><img src="${p.image}" alt="${p.name}" class="product-img"></div>
+    <div class="thumb" style="background:${p.bg}">${pimg(p)}</div>
     <div class="mb"><h2 style="font-size:2rem">${p.name}</h2><p style="color:var(--muted);margin-top:8px">${p.desc}</p>
     <table class="tbl">${p.table.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td></tr>`).join('')}</table>
     <div class="btns"><button class="btn btn-primary" data-add="${p.id}">+ Add to inquiry</button><a class="btn btn-outline" target="_blank" rel="noopener" href="https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('Hello Emaza, I am interested in '+p.name)}">💬 Ask on WhatsApp</a></div></div>`;
@@ -195,7 +247,7 @@ function addCart(id){
 }
 function drawCart(){
   const n=cart.reduce((a,c)=>a+c.qty,0); const b=$('#badge'); b.textContent=cart.length; b.style.display=cart.length?'grid':'none';
-  $('#cartList').innerHTML = cart.length ? cart.map(c=>{const p=PRODUCTS.find(x=>x.id==c.id);return `<div class="item"><span class="em">${p.em}</span><div><b>${p.name}</b><br><small style="color:var(--muted)">Quantity (MT)</small></div>
+  $('#cartList').innerHTML = cart.length ? cart.map(c=>{const p=PRODUCTS.find(x=>x.id==c.id);return `<div class="item"><span class="em">${pimg(p,'cart-img')}</span><div><b>${p.name}</b><br><small style="color:var(--muted)">Quantity (MT)</small></div>
    <div class="qty"><button data-m="${c.id}">−</button><input type="number" min="1" value="${c.qty}" data-q="${c.id}"><button data-p="${c.id}">+</button></div></div>`}).join('')
    : `<p style="color:var(--muted);text-align:center;padding:40px 10px">Your inquiry list is empty.<br>Add products to request one combined quote.</p>`;
 }
@@ -223,8 +275,8 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();$('#menu').classList.remove('open');}});
 
 /* FAQ */
-$('#faq').innerHTML = FAQS.map(f=>`<div class="qa"><button aria-expanded="false">${f[0]}<i>+</i></button><div class="ans"><p>${f[1]}</p></div></div>`).join('');
-$('#faq').onclick=e=>{
+$('#faqList').innerHTML = FAQS.map(f=>`<div class="qa"><button aria-expanded="false">${f[0]}<i>+</i></button><div class="ans"><p>${f[1]}</p></div></div>`).join('');
+$('#faqList').onclick=e=>{
   const b=e.target.closest('button'); if(!b)return; const qa=b.parentElement, ans=$('.ans',qa), open=qa.classList.contains('open');
   $$('.qa').forEach(x=>{x.classList.remove('open');$('.ans',x).style.maxHeight=0;$('button',x).setAttribute('aria-expanded','false');});
   if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';b.setAttribute('aria-expanded','true');}
