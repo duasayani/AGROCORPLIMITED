@@ -1,0 +1,191 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGROCORP LIMITED | Admin Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f6f2;color:#243328}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#173d2b;color:white;padding:26px 18px}
+.logo{font-size:25px;font-weight:bold;margin-bottom:8px}
+.sub{color:#bdcfbf;font-size:12px;margin-bottom:35px}
+.nav{display:block;padding:13px 14px;color:#dce9df;text-decoration:none;border-radius:8px;margin:7px 0}
+.nav.active,.nav:hover{background:#2d6344;color:white}
+.main{flex:1;padding:30px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:15px}
+.top h1{font-size:26px}
+.top p{color:#718076;margin-top:6px}
+.logout{background:#fff;border:1px solid #ddd;padding:10px 17px;border-radius:7px;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:25px}
+.card{background:white;padding:21px;border-radius:12px;border:1px solid #e7ece6}
+.card p{color:#78847a;font-size:13px}
+.card h2{font-size:29px;margin-top:12px;color:#24563a}
+.section{background:white;padding:22px;border-radius:12px;border:1px solid #e7ece6;margin-bottom:22px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.section h3{font-size:18px}
+.search{padding:10px;border:1px solid #dce2dc;border-radius:7px;max-width:230px;width:100%}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:14px 10px;border-bottom:1px solid #edf0ec;font-size:13px}
+th{color:#738075;font-weight:600}
+.status{padding:6px 9px;border-radius:20px;background:#edf4ed;color:#32623c;font-size:11px}
+.action{border:0;background:#edf4ed;color:#285b39;padding:8px 11px;border-radius:6px;cursor:pointer}
+.activity{color:#738075;font-size:13px;padding:14px 0;border-bottom:1px solid #eee}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+.layout{display:block}.sidebar{width:100%;padding:18px}
+.sidebar nav{display:flex;overflow-x:auto;gap:5px}
+.nav{white-space:nowrap;margin:5px 0}
+.main{padding:18px}.stats{grid-template-columns:1fr 1fr}
+.top h1{font-size:21px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+<div class="logo">AGROCORP LIMITED</div>
+<div class="sub">FOOD EXPORT ADMIN</div>
+<nav>
+<a class="nav active" href="#dashboard">▦ Dashboard</a>
+<a class="nav" href="#inquiries">▤ All Inquiries</a>
+<a class="nav" href="#messages">✉ Messages</a>
+<a class="nav" href="#products">□ Products</a>
+<a class="nav" href="#settings">⚙ Settings</a>
+</nav>
+</aside>
+
+<main class="main">
+<header class="top">
+<div>
+<h1>Dashboard Overview</h1>
+<p>Welcome back, Admin. Here's your business overview.</p>
+</div>
+<button class="logout" onclick="alert('Connect Supabase logout here')">Logout ↗</button>
+</header>
+
+<section class="stats" id="dashboard">
+<div class="card"><p>Total Inquiries</p><h2 id="total">0</h2></div>
+<div class="card"><p>New Inquiries</p><h2 id="new">0</h2></div>
+<div class="card"><p>In Progress</p><h2 id="progress">0</h2></div>
+<div class="card"><p>Completed</p><h2 id="completed">0</h2></div>
+</section>
+
+<section class="section" id="inquiries">
+<div class="section-head">
+<h3>Recent Customer Inquiries</h3>
+<input class="search" id="search" placeholder="Search inquiries..." oninput="filterRows()">
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Customer</th><th>Company</th><th>Product</th>
+<th>Country</th><th>Quantity</th><th>Status</th><th>Action</th>
+</tr>
+</thead>
+<tbody id="inquiryRows">
+<tr><td colspan="7">No inquiries loaded yet. Connect Supabase to display customer inquiries.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="section" id="messages">
+<h3>Messages & Replies</h3>
+<p class="activity">Customer messages and admin replies will appear here after database integration.</p>
+</section>
+
+<section class="section" id="products">
+<h3>Product Management</h3>
+<p class="activity">Product management can be connected to your database in the next stage.</p>
+</section>
+
+<section class="section" id="settings">
+<h3>Admin Settings</h3>
+<p class="activity">Your admin account and dashboard settings.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+function filterRows(){
+ const q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('#inquiryRows tr').forEach(row=>{
+  row.style.display=row.innerText.toLowerCase().includes(q)?'':'none';
+ });
+}
+</script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGROCORP LIMITED Admin Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <h1>AGROCORP LIMITED Admin Dashboard</h1>
+  <p id="status">Checking admin access...</p>
+
+  <button id="logoutBtn" hidden>Logout</button>
+
+  <script>
+    const SUPABASE_URL = "https://firqrpeemkxtvdkhnwpx.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_DC8XvOjUsac-vzmXh5cKQQ_gJjwGrh3";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    async function checkAdmin() {
+      const status = document.getElementById('status');
+
+      const { data: { session }, error } =
+        await supabaseClient.auth.getSession();
+
+      if (error || !session) {
+        window.location.replace('index.html');
+        return;
+      }
+
+      const { data: admin, error: adminError } =
+        await supabaseClient
+          .from('admin_users')
+          .select('user_id')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+      if (adminError || !admin) {
+        await supabaseClient.auth.signOut();
+        window.location.replace('index.html');
+        return;
+      }
+
+      status.textContent = 'Welcome, Admin! You are securely logged in.';
+      document.getElementById('logoutBtn').hidden = false;
+    }
+
+    document.getElementById('logoutBtn').onclick = async () => {
+      await supabaseClient.auth.signOut();
+      window.location.replace('index.html');
+    };
+
+    checkAdmin();
+  </script>
+
+</body>
+</html>
+
