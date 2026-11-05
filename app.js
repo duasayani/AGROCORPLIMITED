@@ -483,3 +483,60 @@ $('#udrop').addEventListener('click',e=>{
   if(a==='support')window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent('Hello Emaza, I need some help with my account.')}`,'_blank');
   if(a==='logout'){endSess();renderUser();toast('You have been logged out');}
 });
+
+
+
+
+
+
+
+// DASHBOARD.HTML
+
+ const SUPABASE_URL = "https://firqrpeemkxtvdkhnwpx.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_DC8XvOjUsac-vzmXh5cKQQ_gJjwGrh3";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    async function checkAdmin() {
+      const status = document.getElementById('status');
+
+      const { data: { session }, error } =
+        await supabaseClient.auth.getSession();
+
+      if (error || !session) {
+        window.location.replace('index.html');
+        return;
+      }
+
+      const { data: admin, error: adminError } =
+        await supabaseClient
+          .from('admin_users')
+          .select('user_id')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+
+      if (adminError || !admin) {
+        await supabaseClient.auth.signOut();
+        window.location.replace('index.html');
+        return;
+      }
+
+      status.textContent = 'Welcome, Admin! You are securely logged in.';
+      document.getElementById('logoutBtn').hidden = false;
+    }
+
+    document.getElementById('logoutBtn').onclick = async () => {
+      await supabaseClient.auth.signOut();
+      window.location.replace('index.html');
+    };
+
+    checkAdmin();
+
+    function filterRows(){
+ const q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('#inquiryRows tr').forEach(row=>{
+  row.style.display=row.innerText.toLowerCase().includes(q)?'':'none';
+ });
