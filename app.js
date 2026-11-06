@@ -188,7 +188,7 @@ const GALLERY = [
   // ...PRODUCTS.map(p=>({src:p.image, title:p.name, album:'Products'})),
   { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Open%20Container%20Packed%20with%20Yellow%20Bales.png", title:"Open Containers",  album:"Warehouse" },
   { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Industrial%20Yard%20with%20Yellow%20Bale%20Containers.png", title:"Container loading", album:"Shipping" },
-  { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Premium%20Rice%20Sacks%20in%20Warehouse%20Storage.png", title:"Rice Sacks", album:"Shipping" },
+  
   { src:"https://firqrpeemkxtvdkhnwpx.supabase.co/storage/v1/object/public/products/Yellow%20Cargo%20Bales%20in%20Open%20Shipping%20Container.png", title:"Open Shipping Container", album:"Shipping" },
 
 ];
