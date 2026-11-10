@@ -500,28 +500,7 @@ $('#udrop').addEventListener('click',e=>{
 
 // video section 
 
-(function(){
-    var v=document.getElementById('promoVideo'), b=document.getElementById('vidBtn');
-    if(!v||!b) return;
-    var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var userPaused=reduce;
-    function sync(){ b.textContent = v.paused ? '▶' : '❚❚'; b.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); }
-    b.addEventListener('click',function(){
-      if(v.paused){ userPaused=false; v.play().catch(function(){}); } else { userPaused=true; v.pause(); }
-      sync();
-    });
-    v.addEventListener('play',sync); v.addEventListener('pause',sync);
-    /* play only while visible (saves data and battery) */
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){
-        es.forEach(function(e){
-          if(e.isIntersecting && !userPaused){ v.play().catch(function(){}); }
-          else if(!e.isIntersecting){ v.pause(); }
-        });
-      },{threshold:.35}).observe(v);
-    }
-    sync();
-  })();
+
 
 
 
