@@ -498,9 +498,29 @@ $('#udrop').addEventListener('click',e=>{
 });
 
 
-// video section 
 
-
-
-
+/* ===== HERO VIDEO ===== */
+(function(){
+  var v=document.getElementById('heroVideo'),b=document.getElementById('vSound');
+  if(!v||!b)return;
+  var i=b.querySelector('.vi'),l=b.querySelector('.vl');
+  function ui(){
+    var on=!v.muted;
+    i.textContent=on?'🔊':'🔇';
+    l.textContent=on?'Sound off':'Sound on';
+    b.setAttribute('aria-pressed',on);
+    b.setAttribute('aria-label',on?'Turn sound off':'Turn sound on');
+  }
+  b.addEventListener('click',function(){
+    v.muted=!v.muted;
+    if(!v.muted){v.currentTime=0;}
+    v.play().catch(function(){});
+    ui();
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){
+      e.forEach(function(x){ if(x.isIntersecting){v.play().catch(function(){});} else {v.pause();} });
+    },{threshold:.15}).observe(v);
+  }
+})();
 
