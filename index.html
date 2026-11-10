@@ -101,54 +101,7 @@
 
 <!-- Video Section -->
 
-<!-- ================= PROMO VIDEO ================= -->
-<section id="story" class="vid">
-  <div class="container">
-    <div class="center">
-      <span class="eyebrow">Our Story</span>
-      <h2 class="sec-title">From our facility to your warehouse</h2>
-      <p class="sec-sub">A quick look at the products, packaging and logistics behind every AGROCORP LIMITED shipment.</p>
-    </div>
 
-    <div class="vid-frame">
-      <!--
-        1) Put your video at:  videos/agrocorp-promo.mp4   (and a still image at videos/agrocorp-poster.jpg)
-        2) Optional: add a smaller videos/agrocorp-promo.webm and uncomment the <source> line.
-      -->
-      <video id="promoVideo" muted loop playsinline preload="metadata" poster="videos/agrocorp-poster.jpg" aria-label="AGROCORP LIMITED promo video">
-        <!-- <source src="videos/agrocorp-promo.webm" type="video/webm"> -->
-        <source src="videos/agrocorp-promo.mp4" type="video/mp4">
-      </video>
-      <button class="vid-btn" id="vidBtn" aria-label="Pause video">❚❚</button>
-      <div class="vid-badge">AGROCORP LIMITED · Export Company</div>
-    </div>
-  </div>
-
-  <script>
-  (function(){
-    var v=document.getElementById('promoVideo'), b=document.getElementById('vidBtn');
-    if(!v||!b) return;
-    var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var userPaused=reduce;
-    function sync(){ b.textContent = v.paused ? '▶' : '❚❚'; b.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); }
-    b.addEventListener('click',function(){
-      if(v.paused){ userPaused=false; v.play().catch(function(){}); } else { userPaused=true; v.pause(); }
-      sync();
-    });
-    v.addEventListener('play',sync); v.addEventListener('pause',sync);
-    /* play only while visible (saves data and battery) */
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){
-        es.forEach(function(e){
-          if(e.isIntersecting && !userPaused){ v.play().catch(function(){}); }
-          else if(!e.isIntersecting){ v.pause(); }
-        });
-      },{threshold:.35}).observe(v);
-    }
-    sync();
-  })();
-  </script>
-</section>
 
 
 
