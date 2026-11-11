@@ -120,6 +120,8 @@ const PRODUCTS = [
       ["Lead time", "7–14 business days"]
     ]
   }
+
+  
 ];
 
 const FAQS = [
@@ -128,6 +130,7 @@ const FAQS = [
   ["Can I place a bulk or customized order?","Absolutely! We specialize in bulk orders and can customize packaging sizes, branding and labeling to meet your specific business needs."],
   ["What is the lead time for delivery?","Lead times vary based on quantity and destination, but most orders are processed and shipped within 7–14 business days."],
   ["Are your products certified for quality and safety?","Yes, all our products are processed in certified facilities and meet national and international food safety standards such as ISO and HACCP."]
+  
 ];
 /* ================================= */
 
@@ -152,7 +155,7 @@ function imgFail(img){
 const pimg=(p,cls='product-img')=>`<img src="${p.image}" alt="${p.name}" class="${cls}" data-em="${p.em}" loading="eager" onerror="imgFail(this)">`;
 
 /* Hero list, marquee, footer, select */
-$('#heroList').innerHTML = PRODUCTS.slice(0,4).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${pimg(p,'mini-img')}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
+$('#heroList').innerHTML = PRODUCTS.slice(0,6).map(p=>`<div class="mini" data-open="${p.id}"><div class="em">${pimg(p,'mini-img')}</div><div><b>${p.name}</b><span>${p.cat}</span></div><span class="go">→</span></div>`).join('');
 const mq = PRODUCTS.map(p=>`<span>${p.em} ${p.name}</span>`).join('') + `<span>🚢 Worldwide shipping</span><span>🛡️ ISO & HACCP standards</span><span>📦 Custom packaging</span>`;
 $('#marquee').innerHTML = mq+mq;
 $('#fProd').innerHTML = PRODUCTS.map(p=>`<li><a href="#products" data-open="${p.id}">${p.name}</a></li>`).join('');
