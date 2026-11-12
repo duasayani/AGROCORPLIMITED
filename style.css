@@ -516,7 +516,7 @@ body{overflow-x:clip}
 
 /* ===== HERO VIDEO ===== */
 .vhero{padding:0;position:relative;width:100vw;margin-left:calc(50% - 50vw);height:calc(100svh - 112px);min-height:460px;max-height:860px;background:#06150f;overflow:hidden}
-.vhero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.vhero-video{background-color: #0f6b4f; position:absolute;inset:0;width:100%;height:100vh;object-fit:contain; }
 .vhero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.45) 100%);pointer-events:none}
 .vhero-ui{position:absolute;inset:0;pointer-events:none}
 .vhero-btn{pointer-events:auto;position:absolute;left:24px;bottom:24px;display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(10,20,16,.65);color:#fff;font:600 .88rem 'Plus Jakarta Sans',system-ui,sans-serif;backdrop-filter:blur(8px);cursor:pointer;transition:.25s;z-index:10}
