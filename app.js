@@ -37,7 +37,7 @@ const PRODUCTS = [
       ["Type", "IRRI-6 White Rice"],
       ["Best for", "Households, restaurants, catering"],
       ["Packaging", "Custom bag sizes & branding"],
-      ["Lead time", "7–14 business days"]
+      
     ]
   },
   {
@@ -53,7 +53,7 @@ const PRODUCTS = [
       ["Type", "Sardine (Luar)"],
       ["Best for", "Retail, canning, wholesale"],
       ["Packaging", "Export cartons"],
-      ["Lead time", "7–14 business days"]
+      
     ]
   },
   {
@@ -69,7 +69,7 @@ const PRODUCTS = [
       ["Type", "IRRI-6 White Rice"],
       ["Best for", "Budget-conscious households, retail"],
       ["Packaging", "Custom bag sizes & branding"],
-      ["Lead time", "7–14 business days"]
+     
     ]
   },
   {
@@ -85,7 +85,7 @@ const PRODUCTS = [
       ["Type", "Whole wheat flour"],
       ["Best for", "Bakeries, households, wholesale"],
       ["Packaging", "Custom sizes & branding"],
-      ["Lead time", "7–14 business days"]
+      
     ]
   },
   {
@@ -117,7 +117,7 @@ const PRODUCTS = [
       ["Type", "Brown sugar"],
       ["Best for", "Bakeries, cafés, food industry"],
       ["Packaging", "Custom sizes & branding"],
-      ["Lead time", "7–14 business days"]
+    
     ]
   }
 
@@ -128,7 +128,6 @@ const FAQS = [
   ["What types of cooking oil do you supply?","We provide a variety of high-quality cooking oils including sunflower oil, canola oil, soybean oil and palm oil — available in both refined and crude forms depending on your requirements."],
   ["Do you export cooking oil internationally?","Yes, we export globally and comply with international quality and packaging standards to ensure safe and timely delivery to our clients worldwide."],
   ["Can I place a bulk or customized order?","Absolutely! We specialize in bulk orders and can customize packaging sizes, branding and labeling to meet your specific business needs."],
-  ["What is the lead time for delivery?","Lead times vary based on quantity and destination, but most orders are processed and shipped within 7–14 business days."],
   ["Are your products certified for quality and safety?","Yes, all our products are processed in certified facilities and meet national and international food safety standards such as ISO and HACCP."]
   
 ];
